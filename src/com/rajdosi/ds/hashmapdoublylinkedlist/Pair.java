@@ -4,9 +4,6 @@
  */
 package com.rajdosi.ds.hashmapdoublylinkedlist;
 
-import java.security.KeyStore.Entry;
-import java.util.Iterator;
-
 public class Pair<L, R> {
 
 	private L left;
@@ -59,9 +56,16 @@ public class Pair<L, R> {
 		return (size == 0);
 	}
 
+	/**
+	 * Checks whether the pair with the given right and left values are present
+	 * in the pair or not
+	 * 
+	 * @param left
+	 * @param right
+	 * @return
+	 */
 	public boolean containsPair(L left, R right) {
-
-		return false;
+		return (this.left == left && this.right == right);
 	}
 
 	/**
@@ -84,11 +88,23 @@ public class Pair<L, R> {
 		return right;
 	}
 
+	/**
+	 * Puts the value of right and left in the pair
+	 * 
+	 * @param left
+	 * @param right
+	 */
 	public void put(L left, R right) {
 		this.left = left;
 		this.right = right;
 	}
 
+	/**
+	 * Puts the value of pair object according to the right and left mentioned
+	 * in the pair
+	 * 
+	 * @param entry
+	 */
 	public void put(Pair<? extends L, ? extends R> entry) {
 		this.left = entry.getLeft();
 		this.right = entry.getRight();
