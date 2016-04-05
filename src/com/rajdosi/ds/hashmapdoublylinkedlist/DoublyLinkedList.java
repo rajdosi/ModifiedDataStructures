@@ -4,24 +4,12 @@ import java.util.NoSuchElementException;
 
 public class DoublyLinkedList<E> {
 
-	private Node head;
-	private Node tail;
+	private DLLNode<E> head;
+	private DLLNode<E> tail;
 	private int size;
 
 	public DoublyLinkedList() {
 		size = 0;
-	}
-
-	public class Node {
-		E element;
-		Node next;
-		Node previous;
-
-		public Node(E element, Node next, Node previous) {
-			this.element = element;
-			this.next = next;
-			this.previous = previous;
-		}
 	}
 
 	public int getSize() {
@@ -37,7 +25,7 @@ public class DoublyLinkedList<E> {
 	 * 
 	 * @return Node
 	 */
-	public Node getHead() {
+	public DLLNode<E> getHead() {
 		return head;
 	}
 	
@@ -48,8 +36,8 @@ public class DoublyLinkedList<E> {
 	 * @param element
 	 * @return Node
 	 */
-	public Node addNode(E element) {
-		Node tmp = new Node(element, null, tail);
+	public DLLNode<E> addNode(E element) {
+		DLLNode<E> tmp = new DLLNode<E>(element, null, tail);
 		if (tail != null) {
 			tail.next = tmp;
 		}
@@ -66,7 +54,7 @@ public class DoublyLinkedList<E> {
 	 * 
 	 * @param node
 	 */
-	public void deleteNode(Node node) {
+	public void deleteNode(DLLNode<E> node) {
 
 		if (isEmpty()) {
 			throw new NoSuchElementException();
@@ -81,8 +69,8 @@ public class DoublyLinkedList<E> {
 			tail = tail.previous;
 			tail.next = null;
 		} else {
-			Node nextNode = node.next;
-			Node prevNode = node.previous;
+			DLLNode<E> nextNode = node.next;
+			DLLNode<E> prevNode = node.previous;
 
 			prevNode.next = nextNode;
 			nextNode.previous = prevNode;
@@ -96,7 +84,7 @@ public class DoublyLinkedList<E> {
 	 */
 	public void display() {
 		System.out.println("The nodes in Doubly Linked List are:");
-		for (Node tempNode = head; tempNode != null; tempNode = tempNode.next) {
+		for (DLLNode<E> tempNode = head; tempNode != null; tempNode = tempNode.next) {
 			System.out.println(tempNode.element);
 		}
 	}

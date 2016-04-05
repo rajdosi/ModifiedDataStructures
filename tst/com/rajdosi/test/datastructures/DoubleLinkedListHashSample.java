@@ -2,6 +2,9 @@ package com.rajdosi.test.datastructures;
 
 import com.rajdosi.ds.hashmapdoublylinkedlist.HashOperationOnDoublyLinkedList;
 
+/**
+ * @author wazza
+ */
 public class DoubleLinkedListHashSample {
 
 	/**

@@ -2,12 +2,10 @@ package com.rajdosi.ds.hashmapdoublylinkedlist;
 
 import java.util.HashMap;
 
-import com.rajdosi.ds.hashmapdoublylinkedlist.DoublyLinkedList.Node;
-
 public class HashOperationOnDoublyLinkedList<E> {
 
 	public DoublyLinkedList<E> doublyLinkedList = new DoublyLinkedList<>();
-	public HashMap<E, Node> doublyLinkedListMap = new HashMap<>();
+	public HashMap<E, DLLNode<E>> doublyLinkedListMap = new HashMap<>();
 
 	/**
 	 * This method adds an element into Doubly Linked List and Hash Map created
@@ -15,7 +13,7 @@ public class HashOperationOnDoublyLinkedList<E> {
 	 * @param element
 	 */
 	public void addElement(E element) {
-		Node node = doublyLinkedList.addNode(element);
+		DLLNode<E> node = doublyLinkedList.addNode(element);
 		doublyLinkedListMap.put(element, node);
 	}
 
@@ -38,9 +36,9 @@ public class HashOperationOnDoublyLinkedList<E> {
 	 * 
 	 * @return
 	 */
-	public Node searchNextInDoublyLinkedList() {
+	public DLLNode<E> searchNextInDoublyLinkedList() {
 		if (!doublyLinkedList.isEmpty()) {
-			Node node = doublyLinkedList.getHead();
+			DLLNode<E> node = doublyLinkedList.getHead();
 			retrieveElement(doublyLinkedList.getHead().element);
 			return node;
 		} else
