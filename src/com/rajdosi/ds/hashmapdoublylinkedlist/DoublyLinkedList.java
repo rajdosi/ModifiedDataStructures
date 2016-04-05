@@ -33,10 +33,20 @@ public class DoublyLinkedList<E> {
 	}
 
 	/**
+	 * This method returns the first element of the doubly linked list created
+	 * 
+	 * @return Node
+	 */
+	public Node getHead() {
+		return head;
+	}
+	
+	/**
 	 * According to the use case node will be only entered at the end of the
 	 * doubly linked list.
 	 * 
 	 * @param element
+	 * @return Node
 	 */
 	public Node addNode(E element) {
 		Node tmp = new Node(element, null, tail);
@@ -58,29 +68,26 @@ public class DoublyLinkedList<E> {
 	 */
 	public void deleteNode(Node node) {
 
-		if (isEmpty()){
+		if (isEmpty()) {
 			throw new NoSuchElementException();
 		}
-		
+
 		if (node == head && node == tail) {
 			head = tail = null;
-		}
-		else if (node == head) {
-			head = head.next; 
+		} else if (node == head) {
+			head = head.next;
 			head.previous = null;
-		}
-		else if (node == tail) {
+		} else if (node == tail) {
 			tail = tail.previous;
 			tail.next = null;
-		}
-		else {
+		} else {
 			Node nextNode = node.next;
 			Node prevNode = node.previous;
-			
+
 			prevNode.next = nextNode;
 			nextNode.previous = prevNode;
 		}
-		
+
 	}
 
 	/**
@@ -88,7 +95,7 @@ public class DoublyLinkedList<E> {
 	 * created so far.
 	 */
 	public void display() {
-
+		System.out.println("The nodes in Doubly Linked List are:");
 		for (Node tempNode = head; tempNode != null; tempNode = tempNode.next) {
 			System.out.println(tempNode.element);
 		}

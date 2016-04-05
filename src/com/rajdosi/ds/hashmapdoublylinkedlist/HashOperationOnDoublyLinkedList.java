@@ -4,34 +4,46 @@ import java.util.HashMap;
 
 import com.rajdosi.ds.hashmapdoublylinkedlist.DoublyLinkedList.Node;
 
-public class HashOperationOnDoublyLinkedList {
+public class HashOperationOnDoublyLinkedList<E> {
 
-	public static void checkDoubleLinkedList() {
-		DoublyLinkedList<Integer> doublyLinkedList = new DoublyLinkedList<Integer>();		
-		Node node1 = doublyLinkedList.addNode(2);
-		Node node2 = doublyLinkedList.addNode(4);
-		Node node3 = doublyLinkedList.addNode(3);
-		doublyLinkedList.display();
-		doublyLinkedList.deleteNode(node3);
-		doublyLinkedList.deleteNode(node1);
-		doublyLinkedList.deleteNode(node2);
-		System.out.println("The doubly linked list after removal:\n");
-		doublyLinkedList.display();
+	public DoublyLinkedList<E> doublyLinkedList = new DoublyLinkedList<>();
+	public HashMap<E, Node> doublyLinkedListMap = new HashMap<>();
+
+	/**
+	 * This method adds an element into Doubly Linked List and Hash Map created
+	 * 
+	 * @param element
+	 */
+	public void addElement(E element) {
+		Node node = doublyLinkedList.addNode(element);
+		doublyLinkedListMap.put(element, node);
 	}
-	
-	public static void main(String a[]){
-		DoublyLinkedList<Integer> doublyLinkedList = new DoublyLinkedList<>();
-		HashMap< Integer , Node > doublyLinkedListMap = new HashMap<>();
-		
-		for (int i = 0; i < 100; i++) {
-			Node node =doublyLinkedList.addNode(i);
-			doublyLinkedListMap.put(i, node);
-		}
-		
-		for (int i=0; i < 100; i++){
-			System.out.println(doublyLinkedListMap.get(i).element);
-		}
-		
+
+	/**
+	 * This method removes an element from Doubly Linked List and the Hash Map
+	 * created
+	 * 
+	 * @param element
+	 */
+	public void retrieveElement(E element) {
+		System.out.println("The node to be deleted is:"
+				+ doublyLinkedListMap.get(element).element);
+		doublyLinkedList.deleteNode(doublyLinkedListMap.get(element));
+		doublyLinkedListMap.remove(element);
 	}
-	
+
+	/**
+	 * This method only returns the next head node of the Doubly Linked List
+	 * that can be removed directly using delete Element
+	 * 
+	 * @return
+	 */
+	public Node searchNextInDoublyLinkedList() {
+		if (!doublyLinkedList.isEmpty()) {
+			Node node = doublyLinkedList.getHead();
+			retrieveElement(doublyLinkedList.getHead().element);
+			return node;
+		} else
+			return null;
+	}
 }
