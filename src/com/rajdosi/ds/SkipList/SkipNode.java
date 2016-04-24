@@ -26,10 +26,17 @@ public class SkipNode<E extends Comparable<E>> {
 		this.level = level;
 	}
 
+	/**
+	 * Searching for the element in the Skip List
+	 * 
+	 * @param element
+	 * @return
+	 */
 	public SkipNode<E> search(E element) {
 		if (right != null) {
 			Integer compare = right.getElement().compareTo(element);
 			if (compare.equals(0)) {
+				System.out.println("Element Found");
 				return right;
 			} else if (compare < 0) {
 				return right.search(element);
@@ -45,16 +52,25 @@ public class SkipNode<E extends Comparable<E>> {
 		}
 	}
 
+	/**
+	 * Inserting element in all the list according to the level achieved by
+	 * probability (flips of coin)
+	 * 
+	 * @param element
+	 * @param level
+	 * @param node
+	 */
 	public void insert(E element, Integer level, SkipNode<E> node) {
-		if (level > this.level
+		if (level >= this.level
 				&& (right == null || right.getElement().compareTo(element) > 0)) {
+			System.out.println("Insert");
 			SkipNode<E> newNode = new SkipNode<E>(element, this.level);
-			if (left != null) {
-				newNode.setRight(right);
+			if (right != null) {
 				right.setLeft(newNode);
+				newNode.setRight(right);
 			}
-			left.setRight(newNode);
-			newNode.setLeft(left);
+			right = newNode;
+			newNode.setLeft(this);
 
 			if (node != null) {
 				newNode.setUp(node);
@@ -72,6 +88,16 @@ public class SkipNode<E extends Comparable<E>> {
 		} else if (down != null) {
 			down.insert(element, level, node);
 		}
+
+	}
+
+	/**
+	 * Method to delete an element from the SkipList (element directly removed
+	 * from all the lists in SkipList)
+	 * 
+	 * @return
+	 */
+	public void delete(E element) {
 
 	}
 
