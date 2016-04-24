@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.rajdosi.ds.hashmapdoublylinkedlist.Pair;
+import com.rajdosi.ds.Pair.Pair;
 
 public class CheckPairClass {
 

@@ -2,7 +2,7 @@
  * @author wazza
  * 
  */
-package com.rajdosi.ds.hashmapdoublylinkedlist;
+package com.rajdosi.ds.Pair;
 
 public class Pair<L, R> {
 
