@@ -47,12 +47,15 @@ public class SkipList<E extends Comparable<E>> {
 	 * @param element
 	 */
 	public void insert(E element) {
+		if (element == null)
+			throw new UnsupportedOperationException(
+					"null cant be added as an element because the first element of the Skip List is null");
 		isEmpty = false;
-		size++;
 		int level = 0;
 		while (random() > probability) {
 			level++;
 		}
+		size++;
 
 		while (head.getLevel() < level) {
 			maxLevel++;
@@ -68,6 +71,9 @@ public class SkipList<E extends Comparable<E>> {
 	 * 
 	 */
 	public void delete(E element) {
+		if (element == null)
+			throw new UnsupportedOperationException(
+					"null marks the beginning of every link list so it can't be deleted");
 		head.delete(element);
 	}
 

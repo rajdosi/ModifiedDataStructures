@@ -92,12 +92,41 @@ public class SkipNode<E extends Comparable<E>> {
 
 	/**
 	 * Method to delete an element from the SkipList (element directly removed
-	 * from all the lists in SkipList)
+	 * from all the subsequent lists in SkipList)
 	 * 
 	 * @return
 	 */
 	public void delete(E element) {
+		SkipNode<E> tempNode = this;
+		while (true) {
+			if (tempNode.right != null
+					&& tempNode.right.getElement().compareTo(element) == 0) {
+				tempNode = tempNode.goRight();
+				break;
+			} else if (tempNode.right != null
+					&& tempNode.right.getElement().compareTo(element) < 0)
+				tempNode = tempNode.goRight();
+			else if (tempNode.down != null) {
+				tempNode = tempNode.goDown();
+			} else {
+				throw new NoSuchElementException();
+			}
+		}
 
+		while (true) {
+			tempNode.goLeft().setRight(tempNode.goRight());
+			if (tempNode.goRight() != null) {
+				tempNode.goRight().setLeft(tempNode.goLeft());
+			}
+			if (tempNode.goDown() == null) {
+				tempNode = null;
+				break;
+			} else {
+				tempNode = tempNode.goDown();
+				tempNode.goUp().setDown(null);
+				tempNode.setUp(null);
+			}
+		}
 	}
 
 	// Setters and Getters

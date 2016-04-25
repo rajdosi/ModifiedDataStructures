@@ -19,7 +19,12 @@ public class CheckSkipList {
 		skipList.normalDisplay();
 
 		System.out.println("");
+		skipList.SkipListDisplay();
+
+		skipList.delete(1);
+		System.out.println("");
 		System.out.println("");
 		skipList.SkipListDisplay();
+
 	}
 }
