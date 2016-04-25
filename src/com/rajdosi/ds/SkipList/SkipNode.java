@@ -63,7 +63,6 @@ public class SkipNode<E extends Comparable<E>> {
 	public void insert(E element, Integer level, SkipNode<E> node) {
 		if (level >= this.level
 				&& (right == null || right.getElement().compareTo(element) > 0)) {
-			System.out.println("Insert");
 			SkipNode<E> newNode = new SkipNode<E>(element, this.level);
 			if (right != null) {
 				right.setLeft(newNode);

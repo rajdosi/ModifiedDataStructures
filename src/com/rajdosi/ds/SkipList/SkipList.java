@@ -53,7 +53,6 @@ public class SkipList<E extends Comparable<E>> {
 		while (random() > probability) {
 			level++;
 		}
-		System.out.println(level);
 
 		while (head.getLevel() < level) {
 			SkipNode<E> newHead = new SkipNode<E>(null, head.getLevel() + 1);
@@ -76,6 +75,7 @@ public class SkipList<E extends Comparable<E>> {
 	 * This just prints the SkipList normally (for easy debug purposes)
 	 */
 	public void normalDisplay() {
+		System.out.println("Normal Display : ");
 		Integer l = maxLevel;
 		SkipNode<E> tempHead = head;
 		while (tempHead != null) {
@@ -84,7 +84,6 @@ public class SkipList<E extends Comparable<E>> {
 				System.out.print("-->" + temp.getElement());
 			}
 			System.out.println("");
-			System.out.println("");
 			tempHead = tempHead.goDown();
 			l--;
 		}
@@ -92,13 +91,36 @@ public class SkipList<E extends Comparable<E>> {
 
 	/**
 	 * This prints the SkipList in the way it actually appears to one's eye but
-	 * upside down
+	 * the display is upside down
 	 */
 	public void SkipListDisplay() {
-		Integer l = maxLevel;
+		System.out.println("Skip List Display : ");
 		SkipNode<E> tempHead = head;
-		while (l != 0) {
-			SkipNode<E> previousHead = head.goUp();
+		while (tempHead.getLevel() != 0) {
+			tempHead = tempHead.goDown();
+		}
+
+		for (SkipNode<E> tempNode = tempHead; tempNode != null; tempNode = tempNode
+				.goRight()) {
+			System.out.print("-->" + tempNode.getElement());
+		}
+		SkipNode<E> secondaryHead = tempHead.goUp();
+		while (true) {
+			System.out.println("");
+			SkipNode<E> tempSecondaryHead = secondaryHead;
+			for (SkipNode<E> tempNode = tempHead; tempNode != null; tempNode = tempNode
+					.goRight()) {
+				if (tempSecondaryHead.getElement() == tempNode.getElement()) {
+					System.out.print("-->" + tempSecondaryHead.getElement());
+					if (tempSecondaryHead.goRight() == null)
+						break;
+					tempSecondaryHead = tempSecondaryHead.goRight();
+				} else
+					System.out.print("----");
+			}
+			if (secondaryHead.goUp() == null)
+				break;
+			secondaryHead = secondaryHead.goUp();
 		}
 	}
 
