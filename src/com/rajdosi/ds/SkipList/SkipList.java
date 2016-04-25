@@ -15,7 +15,7 @@ public class SkipList<E extends Comparable<E>> {
 	private SkipNode<E> head;
 	private Integer size = 0;
 	private Integer maxLevel = 1;
-	private Boolean isEmpty = false;
+	private Boolean isEmpty = true;
 	private static final Double probability = 0.5;
 
 	/**
@@ -24,8 +24,8 @@ public class SkipList<E extends Comparable<E>> {
 	public SkipList() {
 		head = new SkipNode<E>(null, 0);
 		size = 0;
-		maxLevel = 0;
-		isEmpty = false;
+		maxLevel = 1;
+		isEmpty = true;
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class SkipList<E extends Comparable<E>> {
 	 * @param element
 	 */
 	public void insert(E element) {
-		isEmpty = true;
+		isEmpty = false;
 		size++;
 		int level = 0;
 		while (random() > probability) {
@@ -55,11 +55,11 @@ public class SkipList<E extends Comparable<E>> {
 		}
 
 		while (head.getLevel() < level) {
+			maxLevel++;
 			SkipNode<E> newHead = new SkipNode<E>(null, head.getLevel() + 1);
 			head.setUp(newHead);
 			newHead.setDown(head);
 			head = newHead;
-			maxLevel++;
 		}
 		head.insert(element, level, null);
 	}
@@ -105,7 +105,7 @@ public class SkipList<E extends Comparable<E>> {
 			System.out.print("-->" + tempNode.getElement());
 		}
 		SkipNode<E> secondaryHead = tempHead.goUp();
-		while (true) {
+		while (secondaryHead != null) {
 			System.out.println("");
 			SkipNode<E> tempSecondaryHead = secondaryHead;
 			for (SkipNode<E> tempNode = tempHead; tempNode != null; tempNode = tempNode
