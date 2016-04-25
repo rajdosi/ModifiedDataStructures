@@ -173,4 +173,5 @@ public class SkipNode<E extends Comparable<E>> {
 	public SkipNode<E> goRight() {
 		return right;
 	}
+
 }

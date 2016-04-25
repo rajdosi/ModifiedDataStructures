@@ -55,7 +55,6 @@ public class SkipList<E extends Comparable<E>> {
 		while (random() > probability) {
 			level++;
 		}
-		size++;
 
 		while (head.getLevel() < level) {
 			maxLevel++;
@@ -65,16 +64,28 @@ public class SkipList<E extends Comparable<E>> {
 			head = newHead;
 		}
 		head.insert(element, level, null);
+		size++;
 	}
 
 	/**
-	 * 
+	 * This removes from the nodes form SkipList and according adjusts the head
+	 * and maxLevel
 	 */
 	public void delete(E element) {
 		if (element == null)
 			throw new UnsupportedOperationException(
 					"null marks the beginning of every link list so it can't be deleted");
 		head.delete(element);
+		while (true) {
+			if (head.goDown() != null && head.goRight() == null) {
+				head = head.goDown();
+				head.setUp(null);
+			} else {
+				break;
+			}
+			maxLevel--;
+		}
+		size--;
 	}
 
 	/**

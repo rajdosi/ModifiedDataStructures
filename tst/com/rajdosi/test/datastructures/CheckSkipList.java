@@ -1,4 +1,6 @@
-package com.rajdosi.ds.SkipList;
+package com.rajdosi.test.datastructures;
+
+import com.rajdosi.ds.SkipList.SkipList;
 
 public class CheckSkipList {
 
@@ -21,7 +23,9 @@ public class CheckSkipList {
 		System.out.println("");
 		skipList.SkipListDisplay();
 
-		skipList.delete(1);
+		skipList.delete(3);
+		skipList.delete(6);
+		skipList.delete(2);
 		System.out.println("");
 		System.out.println("");
 		skipList.SkipListDisplay();
